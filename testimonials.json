@@ -1,0 +1,30 @@
+{
+  "_doc": "Each entry: {id, quote, area, displayName (string or null for anonymous), verified (bool), date}. Set displayName=null for anonymous; otherwise it appears with the area, e.g. 'James, SE17'. Set verified=true after you've checked the postcode/proof-of-address. Site renders all entries in order.",
+  "_seed_examples_remove_before_launch": true,
+  "entries": [
+    {
+      "id": "seed-1",
+      "quote": "I've lived on Walworth Road for eleven years. My nearest station is Elephant — fifteen minutes if I walk fast, twenty-five with a buggy. Every other inner-London neighbourhood I've lived in had a tube on the doorstep. We're not asking for special treatment. We're asking for what zone 1 normally gets.",
+      "area": "SE17",
+      "displayName": "Anjali",
+      "verified": true,
+      "date": "2026-05-07"
+    },
+    {
+      "id": "seed-2",
+      "quote": "I work shifts at King's College Hospital. Denmark Hill is fine — when I can get there. From Camberwell Green at 5am there's no bus that gets me in on time. A reopened Camberwell station would change my life. The platforms are literally still there.",
+      "area": "SE5",
+      "displayName": null,
+      "verified": true,
+      "date": "2026-05-07"
+    },
+    {
+      "id": "seed-3",
+      "quote": "We bought here when our son was born because schools and the park are great. Three years later we've spent a small fortune on Lime hires and Ubers because moving with kids on the bus along Walworth Road is a daily wrestle. The Bakerloo extension is welcome. But it doesn't help us — Burgess Park is fifteen minutes away. Reopen Walworth Road first.",
+      "area": "SE17",
+      "displayName": "Marek",
+      "verified": true,
+      "date": "2026-05-07"
+    }
+  ]
+}

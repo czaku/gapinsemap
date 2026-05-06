@@ -65,9 +65,11 @@ I would like to ask you, specifically:
 
 4. Will you back Lewisham Council's Surrey Canal Road overground station so construction can begin in 2026 on schedule?
 
-The Mayor has a statutory duty under the Greater London Authority Act 1999 (s.141, s.142) to provide accessible, integrated transport, and TfL has a Public Sector Equality Duty under the Equality Act 2010 (s.149). The current pattern of provision — eastern arm planned, western arm permanently deferred — is not consistent with either.
+The Mayor has a statutory duty under the Greater London Authority Act 1999 — specifically s.141(1) ("the Mayor shall develop and implement policies for the promotion and encouragement of safe, integrated, efficient and economic transport facilities and services to, from and within Greater London") and s.142(2) (the Transport Strategy must contain proposals for accessible transport "and shall specify a timetable for the implementation of those proposals"). TfL has a Public Sector Equality Duty under s.149(1) of the Equality Act 2010. On any reasonable reading, the indefinite absence of any rail provision for ~85,000 residents in zones 1–2, while the surrounding network is repeatedly upgraded, is not consistent with these duties.
 
-I would be grateful for a written response setting out your position on each of the four points above and any actions you intend to take.
+5. Will you support the residents' interim demand that — for as long as the Mayor remains in non-compliance with the duties above — the GLA and TfL fund free Lime and Forest e-bike hire (a modest indicative ~£30/month/resident) for verified residents of SE17, SE5, SE1 and SE15, until Walworth Road station reopens to passenger service?
+
+I would be grateful for a written response setting out your position on each of the points above and any actions you intend to take.
 
 Best wishes,
 [Your name]
@@ -87,7 +89,7 @@ I am writing about Walworth (SE17) and central Camberwell (SE5): two adjacent in
 
 I welcome the proposed Bakerloo line extension and want it built in full. However, the current proposal serves only the eastern half of the gap (Old Kent Road → New Cross Gate → Lewisham). It does not deliver a new station at Walworth Road, Camberwell Green or Denmark Hill. The 1940s Bakerloo extension to Camberwell — which appeared on the official tube map — was scrapped and has not been seriously reconsidered. Camberwell's residents have effectively been written out of every iteration of the plan.
 
-You have, under the Greater London Authority Act 1999 (sections 141 and 142), a statutory duty to develop and implement policies that promote safe, integrated, efficient and economic transport across London, and to publish a strategy with a timetable for accessibility. You and TfL also have a Public Sector Equality Duty under section 149 of the Equality Act 2010.
+You have, under the Greater London Authority Act 1999 (sections 141 and 142), a statutory duty to develop and implement policies that promote safe, integrated, efficient and economic transport across London, and to publish a strategy with a timetable for accessibility. You and TfL also have a Public Sector Equality Duty under section 149 of the Equality Act 2010. The indefinite, undocumented absence of any rail provision for ~85,000 residents — sitting in Southwark's most deprived north-central belt (Faraday ward: 31% child poverty) — is not consistent with any of these duties, and we are not aware of any published Equality Impact Assessment that justifies the current scope decision on the BLE.
 
 I am asking you to:
 
@@ -98,6 +100,8 @@ I am asking you to:
 3. Make securing Treasury funding for the (existing east) Bakerloo Line Extension a stated top-three transport priority, and publicly press for its inclusion in the multi-year capital settlement.
 
 4. Use the GLA's leverage and the Mayor's Transport Strategy to ensure Surrey Canal Road overground station opens by 2028 as currently scheduled.
+
+5. While these long-term measures are progressed, fund free Lime and Forest e-bike hire (indicative ~£30/month/verified-resident) for residents of SE17, SE5, SE1 and SE15, drawing on existing TfL active-travel and bus subsidy budgets, until Walworth Road station reopens to passenger service or April 2030, whichever comes first. This is a modest, time-bound substitution mechanism that recognises the real cost residents are paying for the gap. Operators (Lime, HumanForest) already partner with TfL; the agreement template exists. Total indicative cost ~£12.6m/year — approximately 0.25% of the BLE capital cost.
 
 I support the residents' campaign at gapinsemap.london and would welcome an opportunity to give evidence to the Mayor's office or the Transport Committee of the London Assembly.
 

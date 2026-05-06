@@ -107,4 +107,85 @@
       }
     });
   }
+
+  // ---------- Live sign-up counter (loads stats.json) ----------
+  // The site is static; stats.json in the repo is updated either by hand,
+  // or by a GitHub Action that polls Formspree/Tally. Keeps front-end zero-dep.
+  fetch("stats.json", { cache: "no-cache" })
+    .then((r) => (r.ok ? r.json() : null))
+    .then((stats) => {
+      if (!stats || typeof stats.signups !== "number") return;
+      const el = $("signup-count");
+      const strip = $("signup-strip");
+      if (el) el.textContent = stats.signups.toLocaleString("en-GB");
+      // Only reveal the strip once we have a number — avoids "—" flash on slow connections.
+      if (strip && stats.signups >= 0) strip.hidden = false;
+    })
+    .catch(() => { /* fail silently — stats are decorative, not critical */ });
+
+  // ---------- Testimonials renderer (loads testimonials.json) ----------
+  // Built with DOM methods (not innerHTML) so any future content changes can't
+  // accidentally inject markup. Every text bit goes through textContent.
+  const tHost = $("testimonials");
+  if (tHost) {
+    fetch("testimonials.json", { cache: "no-cache" })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => {
+        while (tHost.firstChild) tHost.removeChild(tHost.firstChild);
+        const entries = (data && Array.isArray(data.entries)) ? data.entries : [];
+        if (!entries.length) {
+          const p = document.createElement("p");
+          p.className = "muted small";
+          p.textContent =
+            "No testimonials yet. Be the first — sign up above and tick the testimonial box.";
+          tHost.appendChild(p);
+          return;
+        }
+        for (const entry of entries) {
+          tHost.appendChild(buildTestimonial(entry));
+        }
+      })
+      .catch(() => {
+        tHost.replaceChildren();
+        const p = document.createElement("p");
+        p.className = "muted small";
+        p.textContent =
+          "Could not load testimonials. Try refreshing or skip ahead to Take Action.";
+        tHost.appendChild(p);
+      });
+  }
+
+  // Pure DOM construction — every user-supplied string goes through textContent.
+  function buildTestimonial(t) {
+    const article = document.createElement("article");
+    article.className = "testimonial";
+
+    const bq = document.createElement("blockquote");
+    bq.textContent = String(t.quote || "");
+    article.appendChild(bq);
+
+    const cite = document.createElement("cite");
+
+    const area = document.createElement("span");
+    area.className = "testimonial-area";
+    area.textContent = String(t.area || "");
+    cite.appendChild(area);
+
+    const nameStrong = document.createElement("strong");
+    nameStrong.textContent = t.displayName ? String(t.displayName) : "Anonymous";
+    cite.appendChild(nameStrong);
+
+    if (t.verified) {
+      const sep = document.createTextNode("   ");
+      cite.appendChild(sep);
+      const v = document.createElement("span");
+      v.className = "testimonial-verified";
+      v.title = "Address verified by campaign team";
+      v.textContent = "✓ verified resident";
+      cite.appendChild(v);
+    }
+
+    article.appendChild(cite);
+    return article;
+  }
 })();

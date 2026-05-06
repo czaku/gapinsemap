@@ -1,0 +1,6 @@
+{
+  "signups": 0,
+  "testimonials_published": 0,
+  "lastUpdated": "2026-05-07",
+  "note": "Update this file manually (or via a GitHub Action that polls Tally/Formspree). Site fetches at page load."
+}
