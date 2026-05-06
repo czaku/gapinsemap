@@ -1,0 +1,17 @@
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Local server / test artifacts
+.playwright-mcp/
+map-*.png
+_test.html
+_check.html
+
+# Logs
+*.log

@@ -1,0 +1,900 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gap in SE Map — Reconnect South London (SE1 · SE5 · SE15 · SE16 · SE17)</title>
+<meta name="description" content="SE1, SE5, SE15, SE16, SE17 — Walworth, Camberwell, North Peckham and Bermondsey. 120,000+ Londoners in zone 1–2 with no train station. Sign up. Write to power. Fix the gap.">
+<meta property="og:title" content="Gap in SE Map — Reconnect South London">
+<meta property="og:description" content="120,000 Londoners across SE1, SE5, SE15, SE16 and SE17 with no train station in zone 1–2. Fund the Bakerloo extension. Reopen Camberwell and Walworth Road.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:wght@500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav">
+  <a href="#top" class="brand">
+    <span class="brand-mark" aria-hidden="true">??</span>
+    <span class="brand-text">Gap in <span class="se">SE</span> Map</span>
+  </a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="#gap">The Gap</a>
+    <a href="#people">Who Lives Here</a>
+    <a href="#asks">The Plan</a>
+    <a href="#act">Take Action</a>
+    <a href="#rights">Your Rights</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+  <a href="#act" class="nav-cta">Take action →</a>
+</header>
+
+<main id="top">
+
+<section class="hero">
+  <div class="hero-inner">
+    <p class="kicker">SE17 · SE5 · SE1 — Walworth · Camberwell · Old Kent Road · Burgess Park</p>
+    <h1 class="hero-title">
+      There's a <span class="hl">gap</span><br>
+      in <span class="se-display">SE</span> map.
+    </h1>
+    <p class="hero-sub">
+      <strong>Walworth and central Camberwell sit in zone 1–2 with no rail station of any kind.</strong>
+      Two railway lines pass through them without stopping. The proposed Bakerloo
+      extension would fix Old Kent Road and the east — but leaves Walworth and
+      Camberwell as a transport desert. We can do better.
+    </p>
+    <div class="hero-ctas">
+      <a href="#act" class="btn btn-primary">Sign the campaign</a>
+      <a href="#gap" class="btn btn-ghost">See the gap →</a>
+    </div>
+    <ul class="hero-stats" role="list">
+      <li><strong>~85k</strong><span>residents in Walworth + Camberwell (no station)</span></li>
+      <li><strong>2</strong><span>stations closed in WW1 right here, on a line still in use</span></li>
+      <li><strong>0</strong><span>BLE stations west of Old Kent Rd</span></li>
+      <li><strong>~£300m+</strong><span>income tax paid here every year</span></li>
+    </ul>
+  </div>
+  <div class="hero-map" aria-hidden="true">
+    <!--
+      Schematic, but topologically accurate to inner south London geography.
+      Origin (0,0) = top-left = roughly 51.515°N / -0.140°W (Vauxhall NW).
+      Bottom right = roughly 51.43°N / 0.00°E (Lewisham SE).
+      Thames runs across the top with London Bridge on the SOUTH side.
+      All ~20 station positions reflect actual relative locations.
+    -->
+    <svg viewBox="0 0 720 720" xmlns="http://www.w3.org/2000/svg" role="img"
+         aria-label="Map of inner south London showing the Walworth-Camberwell transport gap, surrounding stations, the proposed Bakerloo extension east arm and our proposed west arm to Brixton">
+      <defs>
+        <radialGradient id="gapGrad" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#ff3b3b" stop-opacity="0.55"/>
+          <stop offset="65%" stop-color="#ff3b3b" stop-opacity="0.18"/>
+          <stop offset="100%" stop-color="#ff3b3b" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <rect width="720" height="720" fill="#0e0e0e"/>
+
+      <!-- ============ River Thames — runs W-E across top with bend ============ -->
+      <path d="M-20 215 Q150 195 320 205 Q480 215 620 175 L740 165 L740 100 L-20 100 Z"
+            fill="#142948" opacity="0.6"/>
+      <path d="M-20 215 Q150 195 320 205 Q480 215 620 175"
+            stroke="#1d3a5f" stroke-width="3" fill="none" opacity="0.8"/>
+      <text x="60" y="150" font-family="Inter, sans-serif" font-size="11" fill="#3a5a8f" letter-spacing="3">RIVER THAMES</text>
+      <text x="58" y="90" font-family="Inter, sans-serif" font-size="9" fill="#5a5a5a" letter-spacing="2">↑ NORTH OF RIVER (CITY OF LONDON)</text>
+
+      <!-- ============ Existing rail / tube lines ============ -->
+      <!-- Northern line (black): from City via London Bridge → Borough → Elephant → Kennington → Oval → Stockwell → south -->
+      <path d="M335 80 L320 230 L275 245 L275 295 L210 360 L165 395 L155 425 L150 540"
+            stroke="#000" stroke-width="5" fill="none" stroke-linejoin="round"/>
+
+      <!-- Bakerloo current (brown): from north via Waterloo to Elephant terminus -->
+      <path d="M205 60 L210 175 L240 240 L275 295"
+            stroke="#b26300" stroke-width="5" fill="none" stroke-linejoin="round"/>
+
+      <!-- Victoria line (light blue): from north via Vauxhall → Stockwell → Brixton terminus -->
+      <path d="M85 60 L88 200 L88 280 L115 360 L145 425 L130 540"
+            stroke="#0098d4" stroke-width="5" fill="none" stroke-linejoin="round"/>
+
+      <!-- Jubilee line (silver): runs east through Waterloo → Southwark → London Bridge → Bermondsey → Canada Water -->
+      <path d="M150 90 L210 165 L260 215 L320 230 L450 270 L560 285"
+            stroke="#a0a5a9" stroke-width="5" fill="none" stroke-linejoin="round"/>
+
+      <!-- Thameslink (magenta) — passes through gap at Walworth Rd & Camberwell WITHOUT stopping today -->
+      <path d="M275 295 L280 370 L275 460 L175 475 L120 540"
+            stroke="#cc3a8a" stroke-width="4" fill="none" stroke-linejoin="round" opacity="0.95"/>
+
+      <!-- Windrush line (orange) — Surrey Quays → Queens Rd Peckham → Peckham Rye → Denmark Hill → Clapham branch -->
+      <path d="M555 285 L515 365 L495 455 L470 510 L390 535 L290 540 L160 530 L100 530"
+            stroke="#fa7b35" stroke-width="4" fill="none" stroke-linejoin="round"/>
+      <!-- Windrush — south branch: Surrey Quays → New Cross Gate → Brockley → Forest Hill -->
+      <path d="M555 285 L575 380 L580 475 L595 580"
+            stroke="#fa7b35" stroke-width="4" fill="none" stroke-linejoin="round"/>
+
+      <!-- Southeastern (green-ish) — London Bridge → New Cross → Lewisham — pass-through, no stops in gap -->
+      <path d="M320 230 L400 290 L475 395 L555 475 L640 540"
+            stroke="#3a8a4a" stroke-width="3" fill="none" stroke-linejoin="round" opacity="0.7"/>
+
+      <!-- ============ Proposed BLE east arm (brown dashed): Elephant → Burgess Park → OKR(×2) → New Cross Gate → Lewisham ============ -->
+      <path d="M275 295 L320 360 L380 410 L460 430 L555 475 L640 540"
+            stroke="#b26300" stroke-width="6" fill="none" stroke-dasharray="10 6" stroke-linejoin="round"/>
+      <!-- BLE proposed station marker: Burgess Park (eastern edge of Walworth) -->
+      <g>
+        <circle cx="345" cy="385" r="4" fill="none" stroke="#b26300" stroke-width="2"/>
+        <text x="350" y="385" font-family="Inter, sans-serif" font-size="9" fill="#d4a060" font-weight="600">Burgess Park</text>
+      </g>
+
+      <!-- ============ PROPOSED west arm (red dashed): Elephant → Walworth Rd → Camberwell Green → Loughborough Jct → Brixton ============ -->
+      <path d="M275 295 L280 370 L275 460 L175 475 L130 540"
+            stroke="#ff3b3b" stroke-width="5" fill="none" stroke-dasharray="3 5" stroke-linejoin="round"/>
+
+      <!-- ============ The Gap — tight ellipse around Walworth Rd + Camberwell, not extending into Kennington/Oval ============ -->
+      <ellipse cx="280" cy="415" rx="62" ry="92" fill="url(#gapGrad)"/>
+      <ellipse cx="280" cy="415" rx="62" ry="92" fill="none"
+               stroke="#ff3b3b" stroke-width="2" stroke-dasharray="4 6"/>
+
+      <!-- ============ Existing stations as dots ============ -->
+      <g fill="#fff" stroke="#0e0e0e" stroke-width="2">
+        <!-- North-of-river / on-river crossings -->
+        <circle cx="320" cy="230" r="6"/>   <!-- London Bridge (south of river — correct) -->
+        <!-- Tube termini & key interchanges -->
+        <circle cx="275" cy="295" r="6"/>   <!-- Elephant & Castle -->
+        <circle cx="200" cy="220" r="5"/>   <!-- Waterloo -->
+        <circle cx="275" cy="245" r="5"/>   <!-- Borough -->
+        <circle cx="85"  cy="280" r="5"/>   <!-- Vauxhall -->
+        <circle cx="210" cy="360" r="5"/>   <!-- Kennington -->
+        <circle cx="165" cy="395" r="5"/>   <!-- Oval -->
+        <circle cx="155" cy="425" r="5"/>   <!-- Stockwell -->
+        <circle cx="175" cy="475" r="5"/>   <!-- Loughborough Junction -->
+        <circle cx="290" cy="540" r="6"/>   <!-- Denmark Hill (south of Camberwell, slightly east in real geography) -->
+        <circle cx="450" cy="270" r="5"/>   <!-- Bermondsey (Jubilee) -->
+        <circle cx="555" cy="285" r="6"/>   <!-- Surrey Quays -->
+        <circle cx="475" cy="395" r="5"/>   <!-- South Bermondsey -->
+        <circle cx="495" cy="455" r="5"/>   <!-- Queen's Rd Peckham -->
+        <circle cx="470" cy="510" r="6"/>   <!-- Peckham Rye -->
+        <circle cx="525" cy="555" r="5"/>   <!-- Nunhead -->
+        <circle cx="555" cy="475" r="5"/>   <!-- New Cross Gate -->
+        <circle cx="640" cy="540" r="6"/>   <!-- Lewisham -->
+      </g>
+
+      <!-- ============ Brixton — terminus we want, highlighted ============ -->
+      <circle cx="130" cy="540" r="9" fill="#ff3b3b" stroke="#0e0e0e" stroke-width="2.5"/>
+      <circle cx="130" cy="540" r="14" fill="none" stroke="#ff3b3b" stroke-width="1.5" opacity="0.5"/>
+
+      <!-- ============ Phantom closed stations inside the gap (Walworth Rd, Camberwell) ============ -->
+      <g fill="#0e0e0e" stroke="#ff3b3b" stroke-width="2">
+        <circle cx="280" cy="370" r="6" stroke-dasharray="2 2"/>  <!-- Walworth Rd -->
+        <circle cx="275" cy="460" r="6" stroke-dasharray="2 2"/>  <!-- Camberwell -->
+      </g>
+
+      <!-- Big question mark inside gap -->
+      <text x="280" y="430" text-anchor="middle" font-family="Fraunces, serif"
+            font-size="100" font-weight="900" fill="#fff" opacity="0.9">?</text>
+
+      <!-- ============ Big area labels — INSIDE the gap, framing the void ============ -->
+      <g font-family="Inter, system-ui, sans-serif" font-size="12" fill="#fff" font-weight="700" letter-spacing="1">
+        <text x="280" y="350" text-anchor="middle">WALWORTH</text>
+        <text x="280" y="490" text-anchor="middle">CAMBERWELL</text>
+        <text x="370" y="410" font-size="10" opacity="0.65" fill="#fa7b35">OLD KENT RD →</text>
+      </g>
+
+      <!-- ============ Station labels ============ -->
+      <g font-family="Inter, system-ui, sans-serif" font-size="10" fill="#9b9b9b" font-weight="600">
+        <text x="335" y="227">London Bridge</text>
+        <text x="290" y="293">Elephant</text>
+        <text x="155" y="216">Waterloo</text>
+        <text x="285" y="241">Borough</text>
+        <text x="55"  y="276">Vauxhall</text>
+        <text x="155" y="356">Kennington</text>
+        <text x="125" y="392">Oval</text>
+        <text x="100" y="425">Stockwell</text>
+        <text x="100" y="494">Loughboro' Jct</text>
+        <text x="240" y="558">Denmark Hill</text>
+        <text x="462" y="266">Bermondsey</text>
+        <text x="565" y="282">Surrey Quays</text>
+        <text x="412" y="392">S. Bermondsey</text>
+        <text x="500" y="450">Queen's Rd</text>
+        <text x="395" y="510">Peckham Rye</text>
+        <text x="535" y="558">Nunhead</text>
+        <text x="510" y="471">New Cross Gate</text>
+        <text x="610" y="558">Lewisham</text>
+      </g>
+
+      <!-- Brixton callout -->
+      <g font-family="Inter, system-ui, sans-serif">
+        <text x="55" y="538" font-size="13" fill="#ff8a8a" font-weight="800" letter-spacing="0.5">BRIXTON</text>
+        <text x="55" y="554" font-size="9" fill="#ff8a8a" letter-spacing="0.5">(Victoria line)</text>
+      </g>
+
+      <!-- North arrow -->
+      <g transform="translate(672 60)" fill="#666">
+        <line x1="0" y1="0" x2="0" y2="-22" stroke="#888" stroke-width="2"/>
+        <polygon points="0,-30 -5,-18 5,-18" fill="#888"/>
+        <text x="-4" y="14" font-family="Inter" font-size="11" fill="#888" font-weight="700">N</text>
+      </g>
+
+      <!-- Legend -->
+      <g font-family="Inter, system-ui, sans-serif" font-size="10" fill="#bbb">
+        <rect x="20" y="630" width="270" height="78" fill="#000" opacity="0.6" rx="6"/>
+        <line x1="32" y1="648" x2="58" y2="648" stroke="#cc3a8a" stroke-width="3"/>
+        <text x="64" y="651">Thameslink — passes Walworth/Camberwell, no stop</text>
+        <line x1="32" y1="666" x2="58" y2="666" stroke="#b26300" stroke-width="4" stroke-dasharray="6 4"/>
+        <text x="64" y="669">BLE proposed (east only)</text>
+        <line x1="32" y1="684" x2="58" y2="684" stroke="#ff3b3b" stroke-width="4" stroke-dasharray="3 4"/>
+        <text x="64" y="687">West arm — Elephant → Brixton (campaign)</text>
+        <circle cx="44" cy="700" r="4" fill="#0e0e0e" stroke="#ff3b3b" stroke-width="2" stroke-dasharray="2 2"/>
+        <text x="64" y="703">Closed stations (Walworth Rd, Camberwell, 1916)</text>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<section id="gap" class="section">
+  <div class="container">
+    <p class="section-eyebrow">The gap — precisely</p>
+    <h2 class="section-title">It's not "south London". It's a specific pair of postcodes that have nothing.</h2>
+    <div class="two-col">
+      <div>
+        <p>
+          Be honest about geography. <strong>Peckham has rail</strong> — Peckham Rye is a
+          major Thameslink and Windrush interchange, and Queen's Road Peckham and Nunhead
+          serve it too. <strong>Bermondsey has the Jubilee line.</strong> South Bermondsey has
+          its own (low-usage) station and Surrey Quays is a short walk. The "south London
+          transport black hole" everyone talks about is not actually evenly distributed.
+        </p>
+        <p>
+          The real desert is two adjacent postcodes: <strong>SE17 (Walworth)</strong> and
+          the centre of <strong>SE5 (Camberwell)</strong>, with the
+          <strong>Old Kent Road</strong> corridor as a linear extension to the east. From
+          Walworth Road or Camberwell Green, the closest station is a 12–18 minute walk in
+          most directions — Elephant, Kennington, Oval, Loughborough Junction, Denmark Hill,
+          or Peckham Rye. None of them is <em>in</em> the area you live and work in.
+        </p>
+        <p>
+          And here's the punchline: <strong>two operational railways cut straight through
+          this area without stopping</strong>. Thameslink trains pass through the old Walworth
+          Road and Camberwell platforms every few minutes on the line from Loughborough
+          Junction to Elephant. London Bridge viaduct trains thunder over north Bermondsey.
+          Both routes <em>used to stop here</em>.
+        </p>
+      </div>
+      <aside class="callout">
+        <h3>The stations that closed and never came back</h3>
+        <ol class="ghost-list">
+          <li><strong>Walworth Road</strong> — closed <strong>1 April 1916</strong>. Platforms still visible from satellite. Thameslink trains pass through every few minutes today.</li>
+          <li><strong>Camberwell</strong> — closed <strong>3 April 1916</strong>. Building still standing on Camberwell Station Road, boarded up.</li>
+          <li><strong>Old Kent Road (a.k.a. Old Kent Road & Hatcham)</strong> — closed <strong>1 January 1917</strong>.</li>
+          <li><strong>Spa Road & Bermondsey</strong> — closed <strong>15 March 1915</strong>. London's first ever railway terminus (1836).</li>
+          <li><strong>Southwark Park</strong> — closed <strong>1 January 1915</strong>.</li>
+        </ol>
+        <p class="muted">
+          Closed "temporarily" to release coal, steel and railway workers for WW1.
+          Wealthier-area stations reopened. These didn't. The line through Walworth Rd and
+          Camberwell still operates — Thameslink runs over the empty platforms multiple times
+          an hour. <strong>It would not be hard to put trains back.</strong>
+        </p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="people" class="section section-alt">
+  <div class="container">
+    <p class="section-eyebrow">Who lives here</p>
+    <h2 class="section-title">~85,000 residents in Walworth & Camberwell. Hundreds of millions in tax. Zero stations.</h2>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-num">~85,000</div>
+        <div class="stat-label">residents in Walworth + central Camberwell</div>
+        <p>
+          Sum of Southwark wards centred on the gap: Faraday (~11.7k), Newington (~14k),
+          North Walworth (~14k), Camberwell Green (~12k), St Giles (~12k), plus Walworth
+          edges and Old Kent Road ward — Census 2021. Excludes Peckham (which has rail) and
+          most of Bermondsey (which has the Jubilee).
+        </p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">~£300m+</div>
+        <div class="stat-label">income tax + NI per year</div>
+        <p>
+          Conservative: ~35,000 employed residents × ~£8k average income tax + employee NI
+          (Southwark median salary £58.4k; the gap area sits below the borough median).
+          Plus VAT, stamp duty and business rates from Old Kent Road and Walworth traders.
+        </p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">~£65m</div>
+        <div class="stat-label">council tax + GLA precept per year</div>
+        <p>
+          ~35,000 households × ~£1,800 (Southwark Band D 2026/27 = £1,967, of which £510 is
+          the GLA precept that funds the Mayor — and TfL). We pay into the system that owes
+          us the rail.
+        </p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">12,000+</div>
+        <div class="stat-label">new homes coming on Old Kent Road</div>
+        <p>
+          The Mayor's London Plan designates Old Kent Road an Opportunity Area for 12,000 new
+          homes and 5,000 jobs by 2041. Southwark has already approved 9,500. The east gets
+          new rail (the BLE). The west gets the homes <em>without</em> the rail.
+        </p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">25,000</div>
+        <div class="stat-label">homes the Bakerloo extension would unlock — eastward</div>
+        <p>
+          TfL's own figure. The extension would run Elephant → Burgess Park → Old Kent Rd →
+          New Cross Gate → Lewisham. Welcome — but it leaves Walworth Rd, Camberwell and
+          Denmark Hill without any new station. The 1940s plan to extend through Camberwell
+          was scrapped.
+        </p>
+      </div>
+      <div class="stat-card stat-emph">
+        <div class="stat-num">0</div>
+        <div class="stat-label">train stations in Walworth or central Camberwell</div>
+        <p>
+          Not "few". Zero. The closest stations — Elephant & Castle, Kennington, Oval,
+          Loughborough Jct, Denmark Hill, Peckham Rye — are 12–25 minute walks from the
+          centre of the desert. Old Kent Road, the only artery, runs 60 buses an hour and is
+          at capacity.
+        </p>
+      </div>
+    </div>
+
+    <p class="footnote">
+      Population, income and tax figures are conservative estimates derived from ONS Census
+      2021 ward data, Southwark Council ward profiles, the Trust for London poverty data
+      (gross household income £73,800), and the 2026/27 Southwark council tax schedule.
+      Population figure is intentionally narrower than the wider "south-London transport
+      black hole" framing in order to be defensible — Peckham, Nunhead, Bermondsey and
+      Surrey Quays do have rail and are not double-counted here. Sources in the FAQ.
+    </p>
+  </div>
+</section>
+
+<section id="ble-not-enough" class="section section-alt">
+  <div class="container">
+    <p class="section-eyebrow">The challenge</p>
+    <h2 class="section-title">The Bakerloo extension is welcome. It's also only half a plan.</h2>
+    <p class="lede">
+      Read the proposed route carefully. Elephant & Castle → Burgess Park (eastern edge) →
+      Old Kent Road → Old Kent Road → New Cross Gate → Lewisham. <strong>Every new station is
+      east of Walworth Road.</strong> The west half of the gap — Walworth, Camberwell Green,
+      Denmark Hill — gets nothing.
+    </p>
+
+    <div class="rights-grid">
+      <article class="right-card">
+        <h3>Walworth gets one edge station</h3>
+        <p>
+          Burgess Park is on the eastern fringe of Walworth, ~10 minutes from Walworth Road
+          itself. From the heart of SE17 you'd still walk further to a tube than most people
+          do in zone 4. <strong>That's not a fix. That's a consolation prize.</strong>
+        </p>
+      </article>
+      <article class="right-card">
+        <h3>Camberwell gets nothing.</h3>
+        <p>
+          Not one new station. The 1940s plan to extend the Bakerloo to Camberwell got as far
+          as the official tube map and was scrapped. The 2014 reopening study was ignored.
+          The current proposal pretends the entire SE5 desert doesn't exist.
+        </p>
+      </article>
+      <article class="right-card">
+        <h3>Denmark Hill is overloaded.</h3>
+        <p>
+          Camberwell residents who can walk that far cram into Denmark Hill, which is already
+          a bottleneck on Thameslink, Windrush and Southeastern. Adding 12,000 Old Kent Road
+          homes to the east doesn't relieve it — it makes it worse.
+        </p>
+      </article>
+      <article class="right-card">
+        <h3>Trains already pass through Walworth Rd & Camberwell.</h3>
+        <p>
+          The Loughborough Junction → Elephant Thameslink line crosses central Camberwell and
+          Walworth Road every few minutes. The platforms still exist. The closures were a
+          1916 emergency measure. <strong>Reopening them is one of the cheapest possible
+          rail wins anywhere in inner London.</strong>
+        </p>
+      </article>
+      <article class="right-card">
+        <h3>The "west arm" was always supposed to exist.</h3>
+        <p>
+          A Bakerloo branch through Walworth Rd → Camberwell to Brixton (Victoria line
+          interchange) was on tube maps in the 1930s and 40s. Every decade since has produced
+          a new study and zero metal. <strong>Brixton terminus = Bakerloo-to-Victoria
+          interchange in one step</strong> — the kind of network upgrade south London hasn't
+          had in a generation.
+        </p>
+      </article>
+      <article class="right-card right-emph">
+        <h3>Bottom line.</h3>
+        <p>
+          We support the Bakerloo extension. <strong>We do not accept it as the whole answer.</strong>
+          Half the gap is still the gap.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="asks" class="section">
+  <div class="container">
+    <p class="section-eyebrow">The plan</p>
+    <h2 class="section-title">Four asks. The cheap one first.</h2>
+    <p class="lede">
+      Two of these have already been studied by TfL. One is already approved and funded.
+      The fourth is the long-term ambition the city has been ducking for ninety years.
+      None of them are radical.
+    </p>
+
+    <ol class="asks">
+      <li>
+        <h3><span class="ask-num">01</span> Reopen Walworth Road and Camberwell stations. Now.</h3>
+        <p>
+          Closed in 1916. The line still operates — Thameslink trains pass through every
+          few minutes without stopping. TfL's 2014 feasibility study costed reopening at
+          ≤£50m (Walworth Rd) and ≤£30m (Camberwell). Today: ~£100m + ~£60m. Together,
+          roughly two weeks of HS2 contingency. <strong>Add both to the next New Stations
+          Fund round and deliver before 2030.</strong> This is the quickest win in inner
+          London — line built, platforms half there, trains already running.
+        </p>
+      </li>
+      <li>
+        <h3><span class="ask-num">02</span> Plan the Bakerloo "west arm" — Elephant to Brixton.</h3>
+        <p>
+          Elephant & Castle → Walworth Road → Camberwell Green → Loughborough Junction →
+          <strong>Brixton</strong>. Brixton is the killer terminus: it creates the only
+          new tube-to-tube interchange south of the river since the Jubilee extension —
+          Bakerloo to Victoria line in one step. That's a network multiplier, not just a
+          local fix. (Denmark Hill, Streatham or Crystal Palace remain options for further
+          extension; Brixton is the threshold ask.) The 1940s plan to extend the Bakerloo
+          to Camberwell appeared on the official tube map and was scrapped without serious
+          rebuttal. Every BLE iteration since has dropped the western branch — without ever
+          explaining why Camberwell's 85,000 residents matter less than Lewisham's.
+          <strong>Reinstate the western arm in the next BLE feasibility revision and
+          formally cost a Brixton terminus.</strong>
+        </p>
+      </li>
+      <li>
+        <h3><span class="ask-num">03</span> Fund the Bakerloo east arm. This Spending Review.</h3>
+        <p>
+          Elephant → Burgess Park → Old Kent Road (×2) → New Cross Gate → Lewisham. We
+          back this. 89% of 2019 consultation respondents supported it. Feasibility design is
+          ongoing. The Treasury must commit a multi-year capital settlement that explicitly
+          names BLE. Target: construction by 2030, service by 2035.
+        </p>
+      </li>
+      <li>
+        <h3><span class="ask-num">04</span> Build Surrey Canal Road overground station — on time.</h3>
+        <p>
+          Lewisham Council has approved funding. £25m secured from developers. TfL says work
+          could start in 2026 and finish by 2028. <strong>Don't let it slip.</strong> Lowest
+          hanging fruit and serves the eastern flank.
+        </p>
+      </li>
+    </ol>
+
+    <p class="footnote">
+      <strong>Why this order matters.</strong> Politicians regularly use a moonshot ask
+      (a tube branch) as cover for delivering nothing. By leading with the cheap, achievable
+      reopening of Walworth Road and Camberwell — which the line and platforms can already
+      support — we make refusal indefensible. The west arm is the long game; the reopenings
+      are the test of good faith.
+    </p>
+  </div>
+</section>
+
+<section id="act" class="section section-act">
+  <div class="container">
+    <p class="section-eyebrow">Take action</p>
+    <h2 class="section-title">This is the part that matters.</h2>
+    <p class="lede">
+      Three minutes. Pick one — or all four. Every signature, every email
+      gets logged into the political weather report.
+    </p>
+
+    <div class="action-grid">
+
+      <article class="action-card">
+        <div class="action-num">1</div>
+        <h3>Sign the campaign</h3>
+        <p>Get on the list. We'll email you when there's a moment to push — a consultation,
+           a council vote, a budget decision. No spam. Unsubscribe anytime.</p>
+
+        <form class="signup" id="signup-form" method="POST"
+              action="https://formspree.io/f/REPLACE_ME">
+          <label class="visually-hidden" for="su-name">Your name</label>
+          <input id="su-name" name="name" type="text" placeholder="Your name" required>
+
+          <label class="visually-hidden" for="su-email">Your email</label>
+          <input id="su-email" name="email" type="email" placeholder="you@example.com" required>
+
+          <label class="visually-hidden" for="su-postcode">Your postcode</label>
+          <input id="su-postcode" name="postcode" type="text" placeholder="Postcode (e.g. SE17 1XX)"
+                 pattern="[A-Za-z]{1,2}[0-9][A-Za-z0-9]?\s?[0-9][A-Za-z]{2}" required>
+
+          <label class="check"><input type="checkbox" name="resident" value="yes"> I live or work in the gap area</label>
+
+          <button type="submit" class="btn btn-primary btn-block">Add me to the campaign</button>
+          <p class="form-note">By signing you agree to be contacted about this campaign. Data
+             is stored securely; we'll never sell it.</p>
+        </form>
+        <p class="success" id="signup-success" hidden>
+          ✓ You're in. Check your inbox to confirm. Now do the next one.
+        </p>
+      </article>
+
+      <article class="action-card">
+        <div class="action-num">2</div>
+        <h3>Email your MP</h3>
+        <p>Three Southwark MPs cover the gap. The site picks the right one from your
+           postcode (or pick from the list). The email is pre-written — you just hit send.</p>
+
+        <div class="mp-picker">
+          <label for="mp-select">Choose your MP:</label>
+          <select id="mp-select">
+            <option value="">— select —</option>
+            <option value="florence">Florence Eshalomi (Vauxhall & Camberwell Green)</option>
+            <option value="miatta">Miatta Fahnbulleh (Peckham)</option>
+            <option value="neil">Neil Coyle (Bermondsey & Old Southwark)</option>
+            <option value="ellie">Ellie Reeves (Lewisham West & East Dulwich)</option>
+          </select>
+          <button type="button" class="btn btn-secondary" id="mp-send">Open email →</button>
+        </div>
+        <p class="muted small">Don't know your MP? Find them via
+           <a href="https://members.parliament.uk/FindYourMP" target="_blank" rel="noopener">
+             members.parliament.uk</a>.
+        </p>
+      </article>
+
+      <article class="action-card">
+        <div class="action-num">3</div>
+        <h3>Email the Mayor of London</h3>
+        <p>Sadiq Khan controls the Mayor's Transport Strategy and the GLA precept on your
+           council tax. He has a statutory duty under the Greater London Authority Act 1999 to
+           provide accessible, integrated transport. Hold him to it.</p>
+        <button type="button" class="btn btn-secondary btn-block" id="mayor-send">
+          Open pre-written email →
+        </button>
+        <p class="muted small">Goes to <code>mayor@london.gov.uk</code>. GLA aims to reply within 20 working days.</p>
+      </article>
+
+      <article class="action-card">
+        <div class="action-num">4</div>
+        <h3>Email TfL Bakerloo Extension team</h3>
+        <p>TfL keeps a dedicated mailbox for the extension. Public weight is one of the things
+           they cite when bidding for funding. Add your name to the count.</p>
+        <button type="button" class="btn btn-secondary btn-block" id="tfl-send">
+          Open pre-written email →
+        </button>
+        <p class="muted small">Goes to <code>ble@tfl.gov.uk</code>. Cc'ing your MP makes it count more.</p>
+      </article>
+
+      <article class="action-card action-share">
+        <div class="action-num">5</div>
+        <h3>Share it</h3>
+        <p>The video that started this campaign has 40k+ views. The campaign needs more.
+           Share with one neighbour, one group chat, one local Facebook group.</p>
+        <div class="share-row">
+          <a class="btn btn-ghost" id="share-x" href="#" target="_blank" rel="noopener">Post on X</a>
+          <a class="btn btn-ghost" id="share-wa" href="#" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="btn btn-ghost" id="share-link" href="#">Copy link</a>
+          <a class="btn btn-ghost" href="https://www.youtube.com/watch?v=wKGo7GlPe3I" target="_blank" rel="noopener">Watch the video</a>
+        </div>
+      </article>
+
+      <article class="action-card action-petition">
+        <div class="action-num">6</div>
+        <h3>Sign the UK Government petition</h3>
+        <p>At <strong>10,000 signatures</strong> the Government has to formally respond. At
+           <strong>100,000</strong>, it gets considered for debate in Parliament. We're starting
+           a petition — link goes live below as soon as it's accepted.</p>
+        <a href="#" class="btn btn-secondary btn-block" id="petition-link">
+          Sign on petition.parliament.uk →
+        </a>
+        <p class="muted small">Petition currently being drafted. Sign up above to get the link
+           the moment it's live.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="rights" class="section section-alt">
+  <div class="container">
+    <p class="section-eyebrow">Your rights</p>
+    <h2 class="section-title">This isn't just bad luck. It's a duty being missed.</h2>
+    <div class="rights-grid">
+
+      <article class="right-card">
+        <h3>Greater London Authority Act 1999, s.141</h3>
+        <p>
+          The Mayor has a <strong>statutory duty</strong> to "develop and implement policies
+          to promote and encourage safe, integrated, efficient and economic transport facilities
+          and services to, from and within London."
+        </p>
+        <p class="muted small">Source: <a href="https://www.legislation.gov.uk/ukpga/1999/29/section/141" target="_blank" rel="noopener">legislation.gov.uk</a></p>
+      </article>
+
+      <article class="right-card">
+        <h3>GLA Act 1999, s.142 — accessibility</h3>
+        <p>
+          The Mayor must produce a transport strategy <strong>including a timetable</strong>
+          for providing transport accessible to people with mobility problems. "Accessible"
+          starts with "exists at all".
+        </p>
+      </article>
+
+      <article class="right-card">
+        <h3>Equality Act 2010, s.149 — Public Sector Equality Duty</h3>
+        <p>
+          TfL and the Mayor must have <strong>due regard</strong> to advancing equality of
+          opportunity and fostering good relations between groups. The gap area is in the
+          most deprived north-central belt of Southwark — Faraday ward has 31% of children in
+          poverty. Transport poverty is a protected-characteristic issue.
+        </p>
+      </article>
+
+      <article class="right-card">
+        <h3>Right to consultation</h3>
+        <p>
+          When the Mayor revises the Transport Strategy he <strong>must consult</strong>
+          representative bodies. Residents' associations and constituted local groups can
+          formally request to be consultees. We will help organise this.
+        </p>
+      </article>
+
+      <article class="right-card">
+        <h3>UK petition thresholds</h3>
+        <p>
+          <strong>10,000 signatures</strong> = formal Government response.
+          <strong>100,000</strong> = considered for parliamentary debate. The 2007 anti-road-pricing
+          petition hit 1.8 million.
+        </p>
+      </article>
+
+      <article class="right-card">
+        <h3>Judicial review (last resort)</h3>
+        <p>
+          If the Mayor or DfT made decisions that ignored the s.149 duty or failed to follow
+          consultation rules, residents (with a community organisation as claimant and pro-bono
+          legal support) could in principle bring a judicial review. Long, expensive, but it
+          has worked elsewhere — e.g. challenges to road schemes. <em>Not our first lever — but
+          a real one.</em>
+        </p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="funding" class="section">
+  <div class="container">
+    <p class="section-eyebrow">Funding the campaign</p>
+    <h2 class="section-title">Yes — and here's how.</h2>
+    <p class="lede">
+      A campaign like this can run on under £5,000/year (domain, email, print materials,
+      occasional events) and scale to £20–50k for paid ads, leaflet drops and legal support.
+      Five real options:
+    </p>
+
+    <ol class="asks">
+      <li>
+        <h3><span class="ask-num">A</span> Crowdfunder / Spacehive</h3>
+        <p>
+          Spacehive specialises in civic projects and councils sometimes match-fund.
+          Crowdfunder is the largest UK platform. Both work well when paired with a clear
+          target (e.g. "£3,000 for 50,000 leaflets across SE17/SE5/SE15").
+        </p>
+      </li>
+      <li>
+        <h3><span class="ask-num">B</span> Southwark Neighbourhoods Fund</h3>
+        <p>
+          £630,000 pot, grants from £500 to £50,000. A constituted local group (or one with
+          a sponsor) can apply for community-engagement, leaflet, event and design costs.
+          Application portal: <a href="https://www.southwark.gov.uk/community-engagement/grants-and-funding/neighbourhoods-fund" target="_blank" rel="noopener">southwark.gov.uk</a>.
+        </p>
+      </li>
+      <li>
+        <h3><span class="ask-num">C</span> Foundation for Integrated Transport</h3>
+        <p>
+          Funded the £1m bus-campaign grant to Campaign for Better Transport. They like
+          campaigns with clear policy asks and a credible coalition. We could partner with
+          CBT or apply directly once we're constituted.
+        </p>
+      </li>
+      <li>
+        <h3><span class="ask-num">D</span> Local business sponsorship</h3>
+        <p>
+          Old Kent Road developers (Berkeley, L&Q, Notting Hill Genesis) have hard commercial
+          interest in better rail — homes sell faster. So do Burgess Park / East Street Market
+          traders. Approach them for £500–£2,000 sponsor packages with logo placement on the
+          campaign site.
+        </p>
+      </li>
+      <li>
+        <h3><span class="ask-num">E</span> Direct donations</h3>
+        <p>
+          A "Buy us a leaflet" tier on Ko-fi or BuyMeACoffee — £3 for one street's letterbox
+          drop. Low-friction, no platform fees beyond Stripe. Plug-and-play donation widget
+          to be added once the campaign is constituted as a not-for-profit.
+        </p>
+      </li>
+    </ol>
+    <p class="footnote">
+      Before raising any money, the campaign should constitute as a non-charitable
+      not-for-profit (CIC or unincorporated association with a written constitution) and
+      open a separate bank account. Talk to <a href="https://communitysouthwark.org/" target="_blank" rel="noopener">Community Southwark</a>
+      — they offer free governance support.
+    </p>
+  </div>
+</section>
+
+<section id="faq" class="section section-alt">
+  <div class="container">
+    <p class="section-eyebrow">FAQ</p>
+    <h2 class="section-title">Common questions.</h2>
+
+    <details>
+      <summary>Why ~85,000 residents and not the bigger 120k figure you sometimes see?</summary>
+      <p>
+        Earlier framings (including in the source video and in some media coverage) describe
+        the "black hole" as Walworth + Camberwell + north Peckham + south Bermondsey, which
+        adds up to roughly 120,000. But on close inspection, Peckham is well served by rail
+        (Peckham Rye is a Thameslink + Windrush interchange; Queen's Road Peckham and Nunhead
+        also serve the area), and most of Bermondsey has the Jubilee line plus London Bridge
+        and Surrey Quays. The genuine, defensible "no station" desert is narrower: SE17
+        (Walworth) and the centre of SE5 (Camberwell), running into the Old Kent Road
+        corridor. Adding Faraday (~11.7k), Newington (~14k), North Walworth (~14k),
+        Camberwell Green (~12k), St Giles (~12k), and parts of Old Kent Road ward gets us
+        to roughly 85,000. We've kept it tight on purpose — easy to defend in a meeting.
+      </p>
+    </details>
+
+    <details>
+      <summary>How did you estimate ~£300m of income tax?</summary>
+      <p>
+        ~85,000 residents × ~60% working age (UK average) × ~70% employed ≈ 35,000 employed.
+        Multiply by an average income tax + employee NI of ~£8,000 (assuming an effective
+        average salary around £40k — well below Southwark's £58.4k median, which is
+        appropriate for an area sitting in the borough's deprivation belt). That gives
+        ~£280–300m. Add VAT, business rates and stamp duty and the real number is higher.
+      </p>
+    </details>
+
+    <details>
+      <summary>Why is reopening Walworth Road / Camberwell stations called "cheap"?</summary>
+      <p>
+        Because everything except the platforms and station boxes already exists. The
+        Loughborough Junction → Elephant Thameslink line operates trains through both sites
+        every few minutes today. The track, signalling, train fleet and operator are all
+        already in place. TfL's 2014 study estimated the cost — including necessary platform
+        rebuilds to modern accessibility standards — at well under £100m combined. For
+        comparison: a single new tube station costs £500m+, and a new tube line costs
+        billions. The 2014 figures need uplifting for inflation, but the order of magnitude
+        is unchanged.
+      </p>
+    </details>
+
+    <details>
+      <summary>Isn't asking for a Bakerloo "west arm" unrealistic?</summary>
+      <p>
+        Possibly — in the short term. That's why it's ask <strong>02</strong>, not 01. The
+        cheap, achievable ask is reopening Walworth Rd and Camberwell. The west arm is the
+        long-game ambition we want kept formally on the planning table rather than quietly
+        struck out. It was on the official tube map in the 1940s. It deserves at least one
+        properly costed feasibility study in this decade.
+      </p>
+    </details>
+
+    <details>
+      <summary>Why Brixton, not Denmark Hill, as the west-arm terminus?</summary>
+      <p>
+        Network economics. Denmark Hill has three suburban rail lines (Thameslink, Windrush,
+        Southeastern) but no Underground. Brixton has the <strong>Victoria line</strong> — a
+        tube. A Bakerloo terminus at Brixton would create the only new tube-to-tube
+        interchange south of the Thames since the Jubilee extension. Tube-to-tube
+        interchanges generate roughly 2–3× the ridership uplift of tube-to-rail because
+        passengers can change Underground lines without leaving the network. The route
+        Elephant → Walworth Rd → Camberwell Green → Loughborough Junction → Brixton
+        also serves Loughborough Junction (currently no tube either), making it a four-stop
+        win rather than a three-stop one. Denmark Hill is best served by reopening Camberwell
+        station nearby (ask 01) rather than by detouring the tube line through it.
+      </p>
+    </details>
+
+    <details>
+      <summary>Isn't this just NIMBYs against new development?</summary>
+      <p>
+        The opposite. The campaign <strong>supports</strong> the 12,000+ new homes coming on
+        Old Kent Road and the 25,000 the Bakerloo extension would unlock. It says: build
+        them with the rail to serve them, and don't only build the rail on the eastern half
+        of the gap. Right now Walworth and Camberwell are being asked to absorb new
+        density and through-traffic without any new station.
+      </p>
+    </details>
+
+    <details>
+      <summary>Doesn't Camberwell already have Denmark Hill?</summary>
+      <p>
+        Denmark Hill is a station in <em>Camberwell</em> in the strict postal sense (it's
+        SE5), but it sits at the far southern edge of the area, 10–18 minutes' walk from
+        Camberwell Green and over 25 minutes from much of Walworth. It's already a busy
+        interchange (Thameslink, Windrush, Southeastern) and is regularly cited as a
+        capacity bottleneck. Adding 12,000 Old Kent Road homes to the east will load more
+        passengers onto it. Treating Denmark Hill as "the Camberwell station" misreads
+        both geography and capacity.
+      </p>
+    </details>
+
+    <details>
+      <summary>Hasn't the Bakerloo extension been promised forever?</summary>
+      <p>
+        Yes. A 1940s tube map showed it. 2014, 2017 and 2019 consultations all happened.
+        Safeguarding was issued in 2021. What's missing is Treasury funding. The Mayor needs
+        a multi-year capital settlement that explicitly names BLE. That's what we're pushing for.
+      </p>
+    </details>
+
+    <details>
+      <summary>Who's behind this campaign?</summary>
+      <p>
+        Right now: a resident in the gap who watched the
+        <a href="https://www.youtube.com/watch?v=wKGo7GlPe3I" target="_blank" rel="noopener">CityMoose video</a>
+        and couldn't find an existing campaign. The intention is to constitute properly as a
+        residents-led group, build a steering group from across SE1, SE5, SE15 and SE17, and
+        formally affiliate with national bodies like Campaign for Better Transport.
+        <strong>If you want to help organise — sign up above and tell us in the form notes.</strong>
+      </p>
+    </details>
+
+    <details>
+      <summary>Sources for the figures on this page?</summary>
+      <ul>
+        <li><a href="https://tfl.gov.uk/corporate/about-tfl/how-we-work/planning-for-the-future/bakerloo-line-extension" target="_blank" rel="noopener">TfL Bakerloo Line Extension</a> — official project page, 25,000 homes / 10,000 jobs / 89% support.</li>
+        <li><a href="https://www.london.gov.uk/programmes-strategies/planning/implementing-london-plan/londons-opportunity-areas/oa-locations/old-kent-road-opportunity-area" target="_blank" rel="noopener">Old Kent Road Opportunity Area</a> — 12,000 homes / 5,000 jobs by 2041.</li>
+        <li><a href="https://www.southwark.gov.uk/council-tax/how-much/bands-and-charges" target="_blank" rel="noopener">Southwark Council Tax bands</a> — 2026/27 Band D £1,967.26.</li>
+        <li><a href="https://trustforlondon.org.uk/data/boroughs/southwark-poverty-and-inequality-indicators/" target="_blank" rel="noopener">Trust for London — Southwark</a> — gross household income £73,800.</li>
+        <li><a href="https://www.ons.gov.uk/explore-local-statistics/areas/E09000028-southwark" target="_blank" rel="noopener">ONS Southwark</a> — Census 2021 ward populations.</li>
+        <li><a href="https://www.legislation.gov.uk/ukpga/1999/29/contents" target="_blank" rel="noopener">Greater London Authority Act 1999</a> — sections 141, 142.</li>
+        <li><a href="https://www.legislation.gov.uk/ukpga/2010/15/section/149" target="_blank" rel="noopener">Equality Act 2010, s.149</a> — Public Sector Equality Duty.</li>
+        <li><a href="https://www.ianvisits.co.uk/articles/additional-funding-found-to-push-ahead-with-new-london-overground-station-84014/" target="_blank" rel="noopener">Surrey Canal Road station funding update</a>.</li>
+      </ul>
+    </details>
+
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div>
+      <p class="brand"><span class="brand-mark">??</span> <span class="brand-text">Gap in <span class="se">SE</span> Map</span></p>
+      <p class="muted small">A residents' campaign for South London transport.<br>
+         SE1 · SE5 · SE15 · SE16 · SE17 — Walworth · Camberwell · Peckham · Bermondsey.</p>
+    </div>
+    <div>
+      <p class="muted small"><strong>Inspired by</strong> the
+        <a href="https://www.youtube.com/watch?v=wKGo7GlPe3I" target="_blank" rel="noopener">CityMoose video</a>
+        on London's biggest transport black hole.</p>
+      <p class="muted small">
+        Not affiliated with TfL, GLA, Southwark Council, Lewisham Council or any political party.
+      </p>
+    </div>
+    <div>
+      <p class="muted small">Built by residents. Free to fork.<br>
+         Domain placeholder: <code>gapinsemap.london</code>.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
