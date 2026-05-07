@@ -1,0 +1,28 @@
+name = "gapinsemap-api"
+main = "index.js"
+compatibility_date = "2026-04-01"
+
+# Bind a D1 database for submissions storage. Run:
+#   wrangler d1 create gapinsemap
+# then paste the database_id below.
+[[d1_databases]]
+binding = "DB"
+database_name = "gapinsemap"
+database_id = "REPLACE_WITH_ID_FROM_WRANGLER"
+
+# KV namespace used only for short-lived rate-limit counters (per-IP, 1h TTL).
+# Run: wrangler kv:namespace create RATELIMIT
+# then paste the id below.
+[[kv_namespaces]]
+binding = "RATELIMIT"
+id = "REPLACE_WITH_ID_FROM_WRANGLER"
+
+# Vars
+[vars]
+POW_DIFFICULTY = "18"
+RATE_LIMIT_PER_IP_PER_HOUR = "5"
+ALLOWED_ORIGINS = "https://czaku.github.io,https://gapinsemap.london,http://localhost:8765"
+# IP_HASH_SALT and ADMIN_TOKEN are stored as secrets, not in this file.
+# Run:
+#   wrangler secret put IP_HASH_SALT      (use openssl rand -hex 32 to generate)
+#   wrangler secret put ADMIN_TOKEN       (use openssl rand -hex 32 to generate)

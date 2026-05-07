@@ -46,29 +46,82 @@
   const tflBtn = $("tfl-send");
   if (tflBtn) tflBtn.addEventListener("click", () => openMailto(C.emails.tfl()));
 
-  // ---------- Sign-up form ----------
+  // ---------- Sign-up form (encrypted submission) ----------
+  // Posts to our Cloudflare Worker after end-to-end encrypting the payload.
+  // The worker only ever sees ciphertext + the postcode district (for stats).
   const form = $("signup-form");
   if (form) {
     form.addEventListener("submit", async (ev) => {
-      // If Formspree (or equivalent) endpoint hasn't been configured yet,
-      // fall back to a clear placeholder behaviour rather than silently failing.
-      const action = form.getAttribute("action") || "";
-      if (action.includes("REPLACE_ME")) {
-        ev.preventDefault();
+      ev.preventDefault();
+      const success = $("signup-success");
+      const apiUrl = (C.api && C.api.url) || "";
+      const cryptoMod = window.CAMPAIGN_CRYPTO;
+      const pubKey = (C.crypto && C.crypto.publicKey) || "";
+
+      // No backend / no key configured yet → log to console + show notice.
+      if (!apiUrl || !cryptoMod || !pubKey || pubKey === "REPLACE_ME") {
         const data = Object.fromEntries(new FormData(form).entries());
-        console.info("[Gap in the Map] Sign-up captured locally (no backend configured):", data);
-        const success = $("signup-success");
+        console.info("[Gap in SE Map] Captured locally (backend not configured):", data);
         if (success) {
           success.hidden = false;
           success.textContent =
-            "✓ Captured locally (no backend configured yet). Wire up Formspree, Netlify Forms or your own endpoint in index.html to start collecting.";
+            "✓ Captured locally. Backend not yet configured — see MODERATION.md for setup.";
         }
         form.reset();
         return;
       }
-      // Otherwise let Formspree handle the POST normally and show success after.
-      // (For pure UX we could intercept with fetch() — keeping native submit for reliability.)
+
+      // Build the encrypted submission. Show a status line while PoW solves.
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const formData = Object.fromEntries(new FormData(form).entries());
+      const status = ensurePowStatus(form);
+      status.classList.add("visible", "solving");
+      status.textContent = "Verifying… (one-time CPU work, ~1 second)";
+      if (submitBtn) submitBtn.disabled = true;
+
+      try {
+        const submission = await cryptoMod.buildSubmission(formData);
+        status.textContent = "Sending encrypted…";
+        const r = await fetch(apiUrl.replace(/\/$/, "") + "/submit", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(submission),
+        });
+        if (r.status === 429) {
+          status.classList.remove("solving");
+          status.textContent = "You've hit the per-hour limit. Please try again in an hour.";
+          return;
+        }
+        if (!r.ok) {
+          const body = await r.text().catch(() => "");
+          throw new Error(`Server returned ${r.status} ${body}`);
+        }
+        status.classList.remove("solving");
+        status.classList.add("success");
+        status.textContent = "✓ Encrypted & submitted. We'll be in touch.";
+        if (success) {
+          success.hidden = false;
+          success.textContent = "✓ Thanks — you're in. Now share the campaign with one neighbour.";
+        }
+        form.reset();
+      } catch (err) {
+        console.error("[Gap in SE Map] submit failed:", err);
+        status.classList.remove("solving");
+        status.textContent = "Couldn't submit. Please try again, or email us directly.";
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+      }
     });
+  }
+
+  function ensurePowStatus(form) {
+    let s = form.querySelector(".pow-status");
+    if (s) return s;
+    s = document.createElement("p");
+    s.className = "pow-status";
+    s.setAttribute("role", "status");
+    form.appendChild(s);
+    return s;
   }
 
   // ---------- Share buttons ----------

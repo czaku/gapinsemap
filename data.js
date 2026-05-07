@@ -7,6 +7,19 @@ window.CAMPAIGN = {
     tagline: "Bring back our stations. Build the Bakerloo. Reconnect South London.",
   },
 
+  // Backend API (Cloudflare Worker). Set the URL below after `wrangler deploy`
+  // outputs your Worker URL. Until then, the form falls back to console capture.
+  api: {
+    url: "",                                // e.g. "https://gapinsemap-api.czaku.workers.dev"
+  },
+
+  // Encryption — see crypto.js + tools/keygen.mjs.
+  // Generate with `node tools/keygen.mjs`, then paste the printed public key here.
+  // The PRIVATE key never appears in this file. Anywhere.
+  crypto: {
+    publicKey: "REPLACE_ME",                // base64-encoded X25519 public key (32 bytes raw)
+  },
+
   mps: {
     florence: {
       name: "Florence Eshalomi MP",

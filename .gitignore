@@ -15,3 +15,4 @@ _check.html
 
 # Logs
 *.log
+tools/_smoketest.mjs

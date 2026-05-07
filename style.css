@@ -398,6 +398,87 @@ fieldset.display-pref label {
 }
 fieldset.display-pref input[type="radio"] { accent-color: #ff3b3b; }
 
+/* ---------- Stats page ---------- */
+.stats-page .hero-title { font-size: clamp(56px, 12vw, 130px); }
+.stats-h1-sub {
+  display: block;
+  font-size: 0.32em;
+  letter-spacing: -0.01em;
+  color: #c2c2c2;
+  font-weight: 500;
+  margin-top: 8px;
+}
+#big-total { color: #ff3b3b; font-style: italic; }
+
+.stats-hero { padding: 80px 24px 60px; }
+@media (min-width: 960px) { .stats-hero { padding: 120px 24px 90px; grid-template-columns: 1fr; max-width: 900px; } }
+
+/* Bar chart */
+.bar-chart { display: grid; gap: 14px; margin-top: 36px; max-width: 720px; }
+.bar-row {
+  display: grid; grid-template-columns: 60px 1fr 60px;
+  align-items: center; gap: 14px;
+}
+.bar-label {
+  font-family: 'Fraunces', serif; font-size: 16px; color: #fff;
+  font-weight: 700; letter-spacing: 0.05em;
+}
+.bar-track {
+  background: #131313; border: 1px solid #232323; border-radius: 999px;
+  height: 22px; overflow: hidden;
+}
+.bar-fill {
+  background: linear-gradient(90deg, #ff3b3b, #ff8a3b);
+  height: 100%; border-radius: 999px;
+  transition: width 0.6s ease;
+}
+.bar-value {
+  font-family: 'Fraunces', serif; font-weight: 700;
+  color: #fff; text-align: right; font-size: 16px;
+}
+
+/* Sparkline */
+.sparkline-wrap { margin-top: 36px; }
+.sparkline {
+  display: flex; align-items: flex-end; gap: 10px; height: 200px;
+  padding: 24px;
+  background: #131313; border: 1px solid #232323; border-radius: 14px;
+}
+.spark-bar {
+  flex: 1; background: linear-gradient(180deg, #ff8a3b, #ff3b3b);
+  border-radius: 4px 4px 0 0; min-height: 2px;
+  transition: height 0.6s ease;
+}
+
+/* State cards */
+.state-grid {
+  display: grid; gap: 18px; margin-top: 36px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 760px) { .state-grid { grid-template-columns: repeat(3, 1fr); } }
+.state-card {
+  background: #131313; border: 1px solid #222; border-radius: 14px; padding: 28px;
+}
+.state-num {
+  font-family: 'Fraunces', serif; font-size: 56px; line-height: 1;
+  color: #ff3b3b; font-weight: 700; letter-spacing: -0.02em;
+}
+.state-label {
+  font-size: 13px; text-transform: uppercase; letter-spacing: 0.1em;
+  color: #ff8a8a; margin: 12px 0 14px; font-weight: 600;
+}
+.state-card p { color: #aaa; font-size: 14px; margin: 0; }
+
+/* PoW indicator inside the form */
+.pow-status {
+  font-size: 12px; color: #aaa; padding: 8px 12px;
+  background: #0a0a0a; border: 1px solid #2a2a2a; border-radius: 8px;
+  display: none;
+}
+.pow-status.visible { display: block; }
+.pow-status.solving { color: #ff8a8a; }
+.pow-status.success { color: #87f59c; }
+
 /* ---------- Print ---------- */
 @media print {
   .nav, .hero-ctas, .action-grid, .footer { display: none; }

@@ -1,122 +1,179 @@
-# Moderation & sign-up workflow
+# Moderation, deployment & key management
 
-Day-to-day instructions for keeping the campaign live with real residents.
-
----
-
-## One-time setup — pick a form backend
-
-The form on the site posts to a placeholder. Until you wire a real backend in, every submission is dropped on the floor (logged to the browser console only). Pick one:
-
-### Option A — Tally (recommended)
-- Free, unlimited submissions, no credit card.
-- Sign up at <https://tally.so>.
-- Create a new form with these fields (matching the site form):
-  - **Name** (short answer, required)
-  - **Email** (email, required)
-  - **Postcode** (short answer, required, regex `^[A-Z]{1,2}[0-9][A-Z0-9]?\s?[0-9][A-Z]{2}$`)
-  - **I live or work in the gap area** (checkbox, required)
-  - **Testimonial** (long text, optional)
-  - **Display preference** (multiple choice, default Anonymous)
-  - **Consent to publish** (checkbox, optional)
-- After publishing the form, Tally gives you a form ID like `meQabc`.
-- Tell me the ID — I'll wire the site to either:
-  - **Embed mode** (form lives on tally.so; site links to it), or
-  - **Action mode** (form on our site posts directly to `https://tally.so/api/v1/forms/meQabc/submissions`).
-
-### Option B — Formspree
-- Free tier: 50 submissions/month, then £8/mo.
-- Sign up at <https://formspree.io>.
-- Create a form, copy the endpoint (e.g. `https://formspree.io/f/abc123`).
-- Tell me the endpoint — I replace `REPLACE_ME` in `index.html` with it.
-
-### Option C — Cloudflare Worker
-- More work (a day) but fully owned and free.
-- Ask me to build it when you're ready.
+End-to-end-encrypted submission system. The website never sends plaintext to anyone but you. The moderator (you) holds a private key on a single laptop. Without it, no submission is readable — by us, by Cloudflare, or by anyone else.
 
 ---
 
-## Each new sign-up
+## One-time setup
 
-1. Submission arrives in your Tally / Formspree dashboard + email.
-2. Open `stats.json`, increment `signups` by 1, update `lastUpdated`. Commit + push:
-   ```
-   {"signups": 47, "testimonials_published": 6, "lastUpdated": "2026-05-12"}
-   ```
-3. (Optional, automation): I can write a GitHub Action later that polls Tally hourly and updates `stats.json` automatically.
+Do this once, before the encrypted form goes live. Total time: ~30 minutes.
 
-You can also batch — e.g. update once a week with the new total.
+### 1. Generate your keypair
+
+```sh
+cd /Users/luke/dev/gapinsemap
+node tools/keygen.mjs
+```
+
+You'll be prompted for a passphrase — pick something long, memorable, and *not* a password you use elsewhere. The script writes:
+
+- `~/.gapinsemap/privkey.enc` — your encrypted private key, AES-256-GCM with a PBKDF2-derived key.
+- Prints the public key to stdout. **Paste it into `data.js` as `crypto.publicKey`**.
+
+**Back up `privkey.enc` immediately.** Options:
+- A USB stick stored offline.
+- A 1Password attachment (1Password's encryption-at-rest is solid).
+- A printed QR code of the file's base64 contents in a fireproof safe.
+
+If you lose this file *and* the passphrase, every encrypted submission becomes permanently unreadable.
+
+### 2. Install Cloudflare's `wrangler` CLI
+
+```sh
+npm install -g wrangler
+wrangler login   # opens browser to authenticate against your CF account
+```
+
+### 3. Create a D1 database + KV namespace
+
+```sh
+cd /Users/luke/dev/gapinsemap/worker
+
+wrangler d1 create gapinsemap
+# → outputs a `database_id`. Paste it into wrangler.toml.
+
+wrangler kv:namespace create RATELIMIT
+# → outputs an `id`. Paste it into wrangler.toml.
+
+# Apply the schema
+wrangler d1 execute gapinsemap --file=./schema.sql
+```
+
+### 4. Set the Worker secrets
+
+```sh
+# Per-IP hash salt — generate fresh:
+openssl rand -hex 32 | wrangler secret put IP_HASH_SALT
+
+# Admin token — used by the moderation CLI. Generate fresh:
+openssl rand -hex 32 | wrangler secret put ADMIN_TOKEN
+# COPY this value somewhere safe (1Password). You'll need it on your laptop.
+```
+
+### 5. Deploy
+
+```sh
+wrangler deploy
+# → outputs your Worker URL, e.g.
+# https://gapinsemap-api.czaku.workers.dev
+```
+
+Paste that URL into `data.js` as `api.url`.
+
+### 6. Save the moderation config locally
+
+```sh
+mkdir -p ~/.gapinsemap
+chmod 700 ~/.gapinsemap
+cat > ~/.gapinsemap/config.json <<EOF
+{
+  "api": "https://gapinsemap-api.czaku.workers.dev",
+  "adminToken": "PASTE_ADMIN_TOKEN_HERE"
+}
+EOF
+chmod 600 ~/.gapinsemap/config.json
+```
+
+### 7. Commit + push
+
+```sh
+git add data.js worker/wrangler.toml
+git commit -m "config: wire frontend to live Worker + public key"
+git push
+```
+
+The site is now collecting real, encrypted submissions.
 
 ---
 
-## Each new testimonial — moderation steps
+## Daily moderation routine
 
-When someone ticks "share a testimonial" on the form, you'll get the testimonial text plus their display preference. Steps:
+Whenever you want to process the queue:
 
-### 1. Verify they live in the area
-Email them back asking for proof of residence — any one of:
+```sh
+cd /Users/luke/dev/gapinsemap
+node tools/moderate.mjs
+```
+
+You'll be prompted for the passphrase. The CLI then:
+
+1. Fetches all pending submissions from the Worker (encrypted blobs).
+2. For each, decrypts locally using your private key.
+3. Shows you the decrypted name, email, postcode, optional testimonial, and consent flags.
+4. You decide:
+   - **`a` — approve & publish testimonial.** Adds to `testimonials.json` using the display preference the resident chose (anonymous / firstname+area / fullname+area). Marks Worker entry as approved.
+   - **`s` — approve as signup-only.** Counts towards the headline number; no testimonial gets published.
+   - **`r` — reject.** Marks the Worker entry as rejected. Use for spam, abusive content, or unverifiable submissions.
+   - **`k` — skip.** Leaves the entry pending; comes back next time.
+   - **`q` — quit.** Stops the loop.
+5. After the batch: the CLI offers to commit + push `testimonials.json`. The site rebuilds via the Pages workflow within ~60s.
+
+### Verification policy
+
+Before approving a *testimonial* (sign-ups don't need this), email the resident asking for proof of address — any one of:
 - Council tax bill
 - Utility bill (gas/electric/water)
 - Tenancy agreement
 - Electoral register entry
 
-Postcode alone isn't enough; fraud-resistance matters when this is being cited at the Mayor.
+Postcode in the form alone is not enough — fraud-resistance matters when the campaign is being cited at the Mayor and TfL.
 
-### 2. Decide if it's publishable
-- Is it specific to the gap experience? (Generic "London transport is bad" → reject)
-- Is it free of identifying personal info you wouldn't want public? (Names of children, exact addresses, etc → ask them to redact)
-- Is it civil? (Not abusive)
+---
 
-### 3. Add to `testimonials.json`
-Open the file. Append an entry to the `entries` array:
+## What's stored where
+
+| Where | Plaintext | Ciphertext |
+|---|---|---|
+| Browser memory (during submit) | Form data, ephemeral keys | — |
+| Network (HTTPS) | Postcode district + PoW proof | Encrypted form payload |
+| Worker (Cloudflare) | Postcode district, status, timestamps | Encrypted form payload |
+| D1 database | Postcode district, status, timestamps | Encrypted form payload |
+| `testimonials.json` (public, in repo) | Approved testimonials only, in the display form the resident chose | — |
+| Your laptop (during moderation) | Decrypted data — only while CLI is running | — |
+| `~/.gapinsemap/privkey.enc` | — | Your private key (passphrase-encrypted) |
+
+---
+
+## Key management
+
+- **Use full-disk encryption** on your laptop (FileVault on macOS, BitLocker on Windows).
+- **Don't email the private key** to yourself. Don't put it in a chat. Don't `cat` it into a Slack channel.
+- **Rotate the admin token** every ~3 months: `openssl rand -hex 32 | wrangler secret put ADMIN_TOKEN`, then update `~/.gapinsemap/config.json`.
+- **Don't rotate the encryption keypair** unless the private key is compromised — rotation invalidates every still-pending submission. If you do need to rotate:
+  1. Generate a new keypair.
+  2. Drain the queue using the *old* key first.
+  3. Update `data.js` with the new public key.
+  4. From now on, only the new key works.
+
+---
+
+## Stats updates
+
+The headline counter and `/stats.html` page pull from the Worker's `/count` endpoint — they update automatically from the live D1 database. **You don't need to maintain `stats.json` once the Worker is live.** It's there as a fallback for when the API isn't reachable.
+
+If you want to add a manual "milestones" tracker, edit `stats.json`:
 
 ```json
-{
-  "id": "2026-05-12-anjali",
-  "quote": "I've lived on Walworth Road for eleven years. My nearest station is Elephant — fifteen minutes if I walk fast, twenty-five with a buggy.",
-  "area": "SE17",
-  "displayName": "Anjali",
-  "verified": true,
-  "date": "2026-05-12"
-}
-```
-
-`displayName` rules based on the radio they ticked:
-- **Anonymous** → `null`
-- **First name + area only** → `"Anjali"` (first name only)
-- **Full name + area** → `"Anjali Patel"`
-
-`area` is whatever you can derive from their postcode (the first letters: SE17, SE5, SE1, SE15, SE16).
-
-### 4. Commit + push
-```
-git add testimonials.json stats.json
-git commit -m "content: testimonial — Anjali, SE17"
-git push
-```
-
-Site auto-redeploys via GitHub Actions in ~60s.
-
----
-
-## Bulk update template (for after the launch surge)
-
-If you get 20 testimonials in a day, do them in one batch:
-
-```
-git add testimonials.json stats.json
-git commit -m "content: 20 new testimonials, weekly digest"
-git push
+{ "signups": 1247, "milestones": ["First 100: 2026-05-15", "First 1000: 2026-06-21"] }
 ```
 
 ---
 
-## Future automation (when you want it)
+## Things to add later
 
-When the manual flow gets old, ask me to add:
-
-- **Tally → GitHub Issues webhook**: every form submission opens a GitHub Issue with the data pre-filled. You moderate by closing or labelling.
-- **Auto-update stats.json hourly**: GitHub Action that polls Tally's API for the count and commits to `stats.json`.
-- **Admin page**: a private `/admin.html` (token-protected) that lists pending testimonials and lets you approve with one click — runs in a Cloudflare Worker.
+- **Email confirmation flow.** Currently a sign-up doesn't send an email back. Adding one (via Cloudflare Email Routing or Resend) costs nothing and confirms the email is real.
+- **Tagged labels in moderation.** "spam", "needs-followup", "approved-pending-verification" — useful as the queue grows.
+- **A read-only admin web UI** that shows the queue depth and last activity, but never decrypts. Cheap addition.
+- **Audit log.** Append-only log of every approve/reject decision, signed by the admin token, kept in a separate D1 table.
 
 None of these are needed at launch. Start manual. Automate when manual hurts.

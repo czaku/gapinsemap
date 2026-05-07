@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gap in SE Map — Live stats</title>
+<meta name="description" content="Live campaign stats: signups by postcode area, recent activity, testimonial count. Public, aggregate, no PII.">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:wght@500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="stats-page">
+
+<header class="nav">
+  <a href="index.html" class="brand">
+    <span class="brand-mark" aria-hidden="true">??</span>
+    <span class="brand-text">Gap in <span class="se">SE</span> Map</span>
+  </a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="index.html#asks">The Plan</a>
+    <a href="index.html#interim">Interim Demands</a>
+    <a href="index.html#act">Take Action</a>
+    <a href="index.html#voices">Voices</a>
+    <a href="stats.html" aria-current="page">Stats</a>
+  </nav>
+  <a href="index.html#act" class="nav-cta">Take action →</a>
+</header>
+
+<main id="top">
+
+<section class="hero stats-hero">
+  <div class="hero-inner">
+    <p class="kicker">Live campaign stats</p>
+    <h1 class="hero-title">
+      <span id="big-total">—</span><br>
+      <span class="stats-h1-sub">residents signed up.</span>
+    </h1>
+    <p class="hero-sub">
+      Updated in real time from the campaign's encrypted submission system.
+      No personal information is shown on this page — only aggregate counts.
+      The raw submissions stay encrypted on our server until a moderator decrypts
+      them locally to verify residency.
+    </p>
+    <div class="hero-ctas">
+      <a href="index.html#act" class="btn btn-primary">Add your name →</a>
+      <a href="index.html" class="btn btn-ghost">← Back to campaign</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <p class="section-eyebrow">By postcode</p>
+    <h2 class="section-title">Where signups are coming from.</h2>
+    <p class="lede">
+      The campaign covers SE17, SE5, SE1, SE15 and SE16. Distribution across
+      those postcodes tells us where outreach is working — and where it isn't.
+    </p>
+    <div class="bar-chart" id="area-chart" aria-live="polite">
+      <p class="muted small">Loading…</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <p class="section-eyebrow">Recent activity</p>
+    <h2 class="section-title">Last 14 days.</h2>
+    <p class="lede">Daily signup counts. Bars are scaled to the busiest day in this window.</p>
+    <div class="sparkline-wrap" id="activity-chart" aria-live="polite">
+      <p class="muted small">Loading…</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <p class="section-eyebrow">State of play</p>
+    <h2 class="section-title">Moderation queue + published voices.</h2>
+    <div class="state-grid">
+      <div class="state-card">
+        <div class="state-num" id="state-published">—</div>
+        <div class="state-label">testimonials published</div>
+        <p>
+          Voices on the campaign site, after moderator verified the address. Each is a
+          real resident of the gap area.
+        </p>
+      </div>
+      <div class="state-card">
+        <div class="state-num" id="state-pending">—</div>
+        <div class="state-label">submissions pending review</div>
+        <p>
+          Encrypted on our server, waiting for moderation. Average review time is
+          a few days; we verify residency by email before publishing testimonials.
+        </p>
+      </div>
+      <div class="state-card">
+        <div class="state-num" id="state-approved">—</div>
+        <div class="state-label">total approved signups</div>
+        <p>
+          Residents who've signed up and been verified as living/working in the gap
+          area. Drives the headline number on the homepage.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <p class="section-eyebrow">How this works</p>
+    <h2 class="section-title">No personal data on this page.</h2>
+    <div class="rights-grid">
+      <article class="right-card">
+        <h3>End-to-end encrypted</h3>
+        <p>
+          When you submit the form, your name, email, postcode and any testimonial
+          text are encrypted in your browser using X25519 + AES-256-GCM, before
+          they leave your device. Only a moderator with the matching private key
+          (which never leaves their laptop) can decrypt.
+        </p>
+      </article>
+      <article class="right-card">
+        <h3>Aggregate stats only</h3>
+        <p>
+          What this page shows: total signups, breakdown by postcode district,
+          14-day activity. Nothing more. No names, no emails, no individual
+          submissions are accessible to the campaign server or to anyone reading
+          this page.
+        </p>
+      </article>
+      <article class="right-card">
+        <h3>Open source</h3>
+        <p>
+          The full code, including the encryption protocol, the Worker and the
+          moderation CLI, is at
+          <a href="https://github.com/czaku/gapinsemap" target="_blank" rel="noopener">github.com/czaku/gapinsemap</a>.
+          Audit it, fork it, run your own.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div>
+      <p class="brand"><span class="brand-mark">??</span> <span class="brand-text">Gap in <span class="se">SE</span> Map</span></p>
+      <p class="muted small">A residents' campaign for South London transport.</p>
+    </div>
+    <div>
+      <p class="muted small">Data on this page refreshes when you reload.<br>
+         Submission system source: <a href="https://github.com/czaku/gapinsemap" target="_blank" rel="noopener">github.com/czaku/gapinsemap</a>.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script>
+(function () {
+  // Worker base URL is configured in data.js (campaign.api.url). Single source of truth.
+  function api() {
+    return (window.CAMPAIGN && window.CAMPAIGN.api && window.CAMPAIGN.api.url) || "";
+  }
+
+  const $ = (id) => document.getElementById(id);
+
+  function setText(id, value) {
+    const el = $(id); if (el) el.textContent = value;
+  }
+
+  function fmt(n) { return Number(n || 0).toLocaleString("en-GB"); }
+
+  function renderAreaChart(byArea) {
+    const host = $("area-chart");
+    if (!host) return;
+    while (host.firstChild) host.removeChild(host.firstChild);
+
+    const sortable = ["SE17", "SE5", "SE1", "SE15", "SE16"];
+    const others = Object.keys(byArea).filter((k) => !sortable.includes(k));
+    const order = sortable.concat(others);
+    const max = Math.max(1, ...order.map((k) => byArea[k] || 0));
+
+    if (Object.keys(byArea).length === 0) {
+      const p = document.createElement("p");
+      p.className = "muted small";
+      p.textContent = "No signups yet. Be the first.";
+      host.appendChild(p);
+      return;
+    }
+
+    for (const k of order) {
+      const v = byArea[k] || 0;
+      if (v === 0 && !sortable.includes(k)) continue;
+      const row = document.createElement("div");
+      row.className = "bar-row";
+
+      const label = document.createElement("span");
+      label.className = "bar-label";
+      label.textContent = k;
+      row.appendChild(label);
+
+      const track = document.createElement("div");
+      track.className = "bar-track";
+      const fill = document.createElement("div");
+      fill.className = "bar-fill";
+      fill.style.width = (v / max * 100) + "%";
+      track.appendChild(fill);
+      row.appendChild(track);
+
+      const value = document.createElement("span");
+      value.className = "bar-value";
+      value.textContent = fmt(v);
+      row.appendChild(value);
+
+      host.appendChild(row);
+    }
+  }
+
+  function renderActivity(recentDays) {
+    const host = $("activity-chart");
+    if (!host) return;
+    while (host.firstChild) host.removeChild(host.firstChild);
+
+    if (!recentDays || recentDays.length === 0) {
+      const p = document.createElement("p");
+      p.className = "muted small";
+      p.textContent = "No activity in the last 14 days.";
+      host.appendChild(p);
+      return;
+    }
+
+    // Build a 14-day window with zeros for missing days
+    const today = Math.floor(Date.now() / 86400000);
+    const map = new Map();
+    for (const r of recentDays) map.set(Math.floor(r.day / 86400000), r.n);
+    const days = [];
+    for (let i = 13; i >= 0; i--) {
+      const d = today - i;
+      days.push({ day: d * 86400000, n: map.get(d) || 0 });
+    }
+    const max = Math.max(1, ...days.map((d) => d.n));
+
+    const chart = document.createElement("div");
+    chart.className = "sparkline";
+    for (const d of days) {
+      const bar = document.createElement("div");
+      bar.className = "spark-bar";
+      bar.style.height = (d.n / max * 100) + "%";
+      bar.title =
+        new Date(d.day).toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" }) +
+        ": " + fmt(d.n);
+      chart.appendChild(bar);
+    }
+    host.appendChild(chart);
+  }
+
+  function showError() {
+    setText("big-total", "—");
+    for (const id of ["state-published", "state-pending", "state-approved"]) setText(id, "—");
+    const host1 = $("area-chart"), host2 = $("activity-chart");
+    if (host1) host1.textContent = "Could not load stats.";
+    if (host2) host2.textContent = "Could not load stats.";
+  }
+
+  async function load() {
+    const url = api();
+    if (!url) { showError(); return; }
+    try {
+      const r = await fetch(url + "/count", { cache: "no-cache" });
+      if (!r.ok) throw new Error("status " + r.status);
+      const data = await r.json();
+      setText("big-total", fmt(data.total));
+      const status = data.by_status || {};
+      setText("state-pending",  fmt(status.pending  || 0));
+      setText("state-approved", fmt(status.approved || 0));
+      // Published count comes from testimonials.json; total approved drives the
+      // signups headline. Try to read testimonials.json for the published count.
+      fetch("testimonials.json", { cache: "no-cache" })
+        .then((r) => r.ok ? r.json() : null)
+        .then((t) => setText(
+          "state-published",
+          fmt((t && Array.isArray(t.entries) && t.entries.length) || 0)
+        ))
+        .catch(() => setText("state-published", "0"));
+
+      renderAreaChart(data.by_area || {});
+      renderActivity(data.recent_days || []);
+    } catch (err) {
+      console.warn("[stats] failed:", err.message);
+      showError();
+    }
+  }
+
+  load();
+})();
+</script>
+
+</body>
+</html>
