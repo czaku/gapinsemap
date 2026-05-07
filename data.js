@@ -14,10 +14,9 @@ window.CAMPAIGN = {
   },
 
   // Encryption — see crypto.js + tools/keygen.mjs.
-  // Generate with `node tools/keygen.mjs`, then paste the printed public key here.
   // The PRIVATE key never appears in this file. Anywhere.
   crypto: {
-    publicKey: "REPLACE_ME",                // base64-encoded X25519 public key (32 bytes raw)
+    publicKey: "q8tHQuUa2SBpvFe20Znlr49WPzmNr2jlL36OCe3qjxs=",  // base64 X25519 public key
   },
 
   mps: {

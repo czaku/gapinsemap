@@ -83,27 +83,46 @@ async function deriveKey(passphrase, salt) {
 async function main() {
   console.log("\nGap in SE Map — keygen\n----------------------\n");
 
+  // Non-interactive mode: passphrase via env var (for automation / CI).
+  // Set GAPINSEMAP_KEYGEN_PASSPHRASE to skip the interactive prompts. The
+  // value is still passed through the same KDF and storage path, so the
+  // resulting key file is indistinguishable from one created interactively.
+  const envPass = process.env.GAPINSEMAP_KEYGEN_PASSPHRASE;
+  const envOverwrite = process.env.GAPINSEMAP_KEYGEN_OVERWRITE === "yes";
+
   if (existsSync(OUT_FILE)) {
-    const overwrite = await prompt(
-      `An encrypted private key already exists at:\n  ${OUT_FILE}\n` +
-      `Overwriting will permanently lose the ability to decrypt anything\n` +
-      `that was encrypted with the previous key. Type YES to proceed: `
-    );
-    if (overwrite !== "YES") {
-      console.log("Aborted.");
-      process.exit(1);
+    if (!envOverwrite) {
+      const overwrite = await prompt(
+        `An encrypted private key already exists at:\n  ${OUT_FILE}\n` +
+        `Overwriting will permanently lose the ability to decrypt anything\n` +
+        `that was encrypted with the previous key. Type YES to proceed: `
+      );
+      if (overwrite !== "YES") {
+        console.log("Aborted.");
+        process.exit(1);
+      }
     }
   }
 
-  const pass1 = await prompt("Choose a passphrase (input hidden): ", { silent: true });
-  if (pass1.length < 12) {
-    console.error("Passphrase must be at least 12 characters. Use a passphrase, not a password.");
-    process.exit(1);
-  }
-  const pass2 = await prompt("Repeat passphrase: ", { silent: true });
-  if (pass1 !== pass2) {
-    console.error("Passphrases do not match. Aborted.");
-    process.exit(1);
+  let pass1;
+  if (envPass) {
+    pass1 = envPass;
+    if (pass1.length < 12) {
+      console.error("GAPINSEMAP_KEYGEN_PASSPHRASE must be at least 12 characters.");
+      process.exit(1);
+    }
+    console.log("(passphrase taken from GAPINSEMAP_KEYGEN_PASSPHRASE env var)\n");
+  } else {
+    pass1 = await prompt("Choose a passphrase (input hidden): ", { silent: true });
+    if (pass1.length < 12) {
+      console.error("Passphrase must be at least 12 characters. Use a passphrase, not a password.");
+      process.exit(1);
+    }
+    const pass2 = await prompt("Repeat passphrase: ", { silent: true });
+    if (pass1 !== pass2) {
+      console.error("Passphrases do not match. Aborted.");
+      process.exit(1);
+    }
   }
 
   // Generate X25519 keypair
